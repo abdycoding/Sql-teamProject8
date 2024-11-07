@@ -150,3 +150,9 @@ select ogrenci.ad, ogrenci.soyad, Bolumler.BolumAd
  from ogrenci
 left join Bolumler on Bolumler.bolumId= ogrenci.bolumId;
 
+
+-- Soru 1 : Öğrencleri aldığı dersleri listeletiniz.
+select ogrenci.ad, ogrenci.soyad, Dersler.dersAd
+from ogrenci
+left join OgrenciDersler on ogrenci.ogrId = OgrenciDersler.ogrId
+left join Dersler on OgrenciDersler.dersId= Dersler.dersId;
