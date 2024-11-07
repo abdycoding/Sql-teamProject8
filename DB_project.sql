@@ -223,3 +223,12 @@ left join ogrenci on ogrenci.bolumId = Bolumler.bolumId
 left join OgrenciDersler on OgrenciDersler.ogrId = ogrenci.ogrId
 left join Dersler on OgrenciDersler.dersId = Dersler.dersId
 group by Bolumler.BolumAd;
+
+-- Soru 7 : En yüksek ders saatine sahip bolumu bulunuz. 
+select Bolumler.BolumAd, count(Dersler.saat) as ToplamDersSaati
+from Bolumler
+left join ogrenci on ogrenci.bolumId = Bolumler.bolumId
+left join OgrenciDersler on OgrenciDersler.ogrId = ogrenci.ogrId
+left join Dersler on OgrenciDersler.dersId = Dersler.dersId
+group by Bolumler.BolumAd
+order by ToplamDersSaati desc;
