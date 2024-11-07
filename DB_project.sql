@@ -201,12 +201,11 @@ left join ogrenci on ogrenci.ogrId = OgrenciDersler.ogrId
 group by DersSayisi;
 
 -- Soru 4 : derse kayıtlı olmayan öğrencilerin listesini yazdırınız
--- Soru 5 : hangi öğrenci kaç derse kayıtlı olduğunu bulunuz
--- Soru 6 : Her bölümüm kayıtlı olan toplam ders saatini bulunuz
--- Soru 7 : En yüksek ders saatine sahip bolumu bulunuz. 
--- Soru 8 : Hangi bölümden kaç öğrenci olduğunuz bulunuz.
--- (Ogrenci (ogrId, ad,soyad,email,telefon,bolumId), Dersler(dersId, dersAd, saat), 
--- OgrenciDersler(ogrId, dersId), Bolumler (bolumId, BolumAd))
+SELECT ogrenci.ogrId, ogrenci.ad, ogrenci.soyad
+FROM ogrenci
+LEFT JOIN OgrenciDersler ON ogrenci.ogrId = OgrenciDersler.ogrId
+WHERE OgrenciDersler.ogrId IS NULL;
+
 
 -- Soru 5 : hangi öğrenci kaç derse kayıtlı olduğunu bulunuz
 select ogrenci.ad as ogrenciAdi, count(Dersler.dersId) as dersSayisi
