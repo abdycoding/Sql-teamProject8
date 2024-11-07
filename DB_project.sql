@@ -59,6 +59,7 @@ insert into ogrenci (ogrId, ad, soyad, tel, email, bolumId) VALUES
 ('O020', 'Gökhan', 'Erdoğan', '05339871267', 'gokhan.erdogan@example.com', 'B120');
 select * from ogrenci;
 
+
  create table Dersler(
  dersId varchar(50) default '',
  dersAd varchar(50) not null, 
@@ -66,28 +67,26 @@ select * from ogrenci;
 PRIMARY KEY (dersId)
   );
 INSERT INTO Dersler (dersId, dersAd, saat) VALUES
-('D101', 'Matematik', '09:00 - 10:30'),
-('D102', 'Fizik', '10:45 - 12:15'),
-('D103', 'Kimya', '13:00 - 14:30'),
-('D104', 'Biyoloji', '15:00 - 16:30'),
-('D105', 'Türkçe', '09:00 - 10:30'),
-('D106', 'Tarih', '10:45 - 12:15'),
-('D107', 'Coğrafya', '13:00 - 14:30'),
-('D108', 'Felsefe', '15:00 - 16:30'),
-('D109', 'İngilizce', '09:00 - 10:30'),
-('D110', 'Almanca', '10:45 - 12:15'),
-('D111', 'Fransızca', '13:00 - 14:30'),
-('D112', 'Edebiyat', '15:00 - 16:30'),
-('D113', 'Geometri', '09:00 - 10:30'),
-('D114', 'Müzik', '10:45 - 12:15'),
-('D115', 'Resim', '13:00 - 14:30'),
-('D116', 'Beden Eğitimi', '15:00 - 16:30'),
-('D117', 'Bilgisayar', '09:00 - 10:30'),
-('D118', 'Ekonomi', '10:45 - 12:15'),
-('D119', 'Psikoloji', '13:00 - 14:30'),
-('D120', 'Sosyoloji', '15:00 - 16:30');
-select * from Dersler;
-
+('D101', 'Matematik', 2),
+('D102', 'Fizik', 2),
+('D103', 'Kimya', 2),
+('D104', 'Biyoloji', 2),
+('D105', 'Türkçe', 2),
+('D106', 'Tarih', 2),
+('D107', 'Coğrafya', 2),
+('D108', 'Felsefe', 2),
+('D109', 'İngilizce', 2),
+('D110', 'Almanca', 2),
+('D111', 'Fransızca', 2),
+('D112', 'Edebiyat', 2),
+('D113', 'Geometri', 2),
+('D114', 'Müzik', 2),
+('D115', 'Resim', 2),
+('D116', 'Beden Eğitimi', 2),
+('D117', 'Bilgisayar', 2),
+('D118', 'Ekonomi', 2),
+('D119', 'Psikoloji', 2),
+('D120', 'Sosyoloji', 2);
 
 CREATE TABLE OgrenciDersler (
   ogrId VARCHAR(100) NOT NULL,
@@ -96,7 +95,7 @@ CREATE TABLE OgrenciDersler (
   FOREIGN KEY (ogrId) REFERENCES ogrenci(ogrId),
   FOREIGN KEY (dersId) REFERENCES Dersler(dersId)
 );
--- Insert associations for students from O001 to O020 with various courses
+
 INSERT INTO OgrenciDersler (ogrId, dersId) VALUES
 ('O001', 'D101'), ('O001', 'D102'), ('O001', 'D103'),
 ('O002', 'D104'), ('O002', 'D105'), ('O002', 'D106'),
@@ -182,7 +181,8 @@ select ogrenci.ad, ogrenci.soyad, Dersler.dersAd
 from ogrenci
 left join OgrenciDersler on ogrenci.ogrId = OgrenciDersler.ogrId
 left join Dersler on OgrenciDersler.dersId= Dersler.dersId;
-
+-- (Ogrenci (ogrId, ad,soyad,email,telefon,bolumId), Dersler(dersId, dersAd, saat), 
+-- OgrenciDersler(ogrId, dersId), Bolumler (bolumId, BolumAd))
 
 -- Soru 2 : hangi bölümden, kaç ders kaydı olduğunu bulunuz
 select Bolumler.BolumAd, count(Dersler.dersAd) as DersSayisi
@@ -192,15 +192,21 @@ left join OgrenciDersler on OgrenciDersler.ogrId = ogrenci.ogrId
 left join Dersler on OgrenciDersler.dersId = Dersler.dersId
 group by Bolumler.BolumAd;
 
-
 -- Soru 3 : hangi dersten kaç ogrenci kaydı olduğunu bulunuz
 
-select Dersler.dersAd as DersSayisi, count(ogrenci.ogrID)
+select Dersler.dersAd as DersSayisi, count(ogrenci.ogrID) as OgrenciSayisi
 from Dersler
 left join OgrenciDersler on OgrenciDersler.dersId = Dersler.dersId
 left join ogrenci on ogrenci.ogrId = OgrenciDersler.ogrId
 group by DersSayisi;
 
+-- Soru 4 : derse kayıtlı olmayan öğrencilerin listesini yazdırınız
+-- Soru 5 : hangi öğrenci kaç derse kayıtlı olduğunu bulunuz
+-- Soru 6 : Her bölümüm kayıtlı olan toplam ders saatini bulunuz
+-- Soru 7 : En yüksek ders saatine sahip bolumu bulunuz. 
+-- Soru 8 : Hangi bölümden kaç öğrenci olduğunuz bulunuz.
+-- (Ogrenci (ogrId, ad,soyad,email,telefon,bolumId), Dersler(dersId, dersAd, saat), 
+-- OgrenciDersler(ogrId, dersId), Bolumler (bolumId, BolumAd))
 
 -- Soru 5 : hangi öğrenci kaç derse kayıtlı olduğunu bulunuz
 select ogrenci.ad as ogrenciAdi, count(Dersler.dersId) as dersSayisi
