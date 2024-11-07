@@ -202,5 +202,12 @@ left join ogrenci on ogrenci.ogrId = OgrenciDersler.ogrId
 group by DersSayisi;
 
 
+-- Soru 5 : hangi öğrenci kaç derse kayıtlı olduğunu bulunuz
+select ogrenci.ad as ogrenciAdi, count(Dersler.dersId) as dersSayisi
+from ogrenci
+left join OgrenciDersler on ogrenci.ogrId = OgrenciDersler.ogrId
+left join Dersler on Dersler.dersId = OgrenciDersler.dersId
+group by ogrenciAdi
+;
 
 
