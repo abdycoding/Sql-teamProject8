@@ -182,3 +182,18 @@ select ogrenci.ad, ogrenci.soyad, Dersler.dersAd
 from ogrenci
 left join OgrenciDersler on ogrenci.ogrId = OgrenciDersler.ogrId
 left join Dersler on OgrenciDersler.dersId= Dersler.dersId;
+
+
+-- Soru 2 : hangi bölümden, kaç ders kaydı olduğunu bulunuz
+select Bolumler.BolumAd, count(Dersler.dersAd) as DersSayisi
+from Bolumler
+left join ogrenci on ogrenci.bolumId = Bolumler.bolumId
+left join OgrenciDersler on OgrenciDersler.ogrId = ogrenci.ogrId
+left join Dersler on OgrenciDersler.dersId = Dersler.dersId
+group by Bolumler.BolumAd;
+
+
+
+
+
+
