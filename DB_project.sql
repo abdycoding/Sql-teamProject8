@@ -210,4 +210,10 @@ left join Dersler on Dersler.dersId = OgrenciDersler.dersId
 group by ogrenciAdi
 ;
 
-
+-- Soru 6 : Her bölümüm kayıtlı olan toplam ders saatini bulunuz
+select Bolumler.BolumAd, count(Dersler.saat) as ToplamDersSaati
+from Bolumler
+left join ogrenci on ogrenci.bolumId = Bolumler.bolumId
+left join OgrenciDersler on OgrenciDersler.ogrId = ogrenci.ogrId
+left join Dersler on OgrenciDersler.dersId = Dersler.dersId
+group by Bolumler.BolumAd;
