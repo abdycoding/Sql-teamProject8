@@ -193,6 +193,13 @@ left join Dersler on OgrenciDersler.dersId = Dersler.dersId
 group by Bolumler.BolumAd;
 
 
+-- Soru 3 : hangi dersten kaç ogrenci kaydı olduğunu bulunuz
+
+select Dersler.dersAd as DersSayisi, count(ogrenci.ogrID)
+from Dersler
+left join OgrenciDersler on OgrenciDersler.dersId = Dersler.dersId
+left join ogrenci on ogrenci.ogrId = OgrenciDersler.ogrId
+group by DersSayisi;
 
 
 
