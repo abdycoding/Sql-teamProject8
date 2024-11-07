@@ -144,3 +144,9 @@ select * from Dersler;
 -- sorgu sonuçlarını hem sql hemde çıktısı şeklinde bir Word dökümanı hazırlayıp,
 -- kendi grup chatinizde hocayı etiketliyerek paylaşınız.
 
+-- Soru 0 : Öğrencilerin bölümlerini listeletiniz.
+
+select ogrenci.ad, ogrenci.soyad, Bolumler.BolumAd
+ from ogrenci
+left join Bolumler on Bolumler.bolumId= ogrenci.bolumId;
+
